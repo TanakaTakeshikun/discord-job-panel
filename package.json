@@ -1,0 +1,30 @@
+{
+  "name": "discord-job-panel",
+  "version": "1.0.0",
+  "description": "Discord.jsで簡単に役職パネルが作成できます",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanakataku/discord-job-panel.git"
+  },
+  "keywords": [
+    "Discord",
+    "Discordbot",
+    "Discord.js",
+    "Discord-job",
+    "Discord-panel",
+    "Discord-job-panel"
+  ],
+  "author": "buri9515 <discord.buri9515@gmail.com> (https://qiita.com/minecraftomato1/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tanakataku/discord-job-panel/issues"
+  },
+  "homepage": "https://github.com/tanakataku/discord-job-panel#readme"
+}
