@@ -5,6 +5,9 @@ Discord.jsv13
 
 (v14は未検証)
 
+バグがあった場合は``BURI#9515``まで
+
+interactionCreateイベントは未検証なのでバグがある可能性大
 # sample
 ```js
 const {Client,Intents} = require('discord.js'),
