@@ -73,7 +73,6 @@ role:[role1,role2,role3]
 **title**:select_menuのタイトルを入れてください(string)
 
 **返り値**
-返り値
 
 **undefined**
 
@@ -172,8 +171,9 @@ db_type({id: 0 or 1,label: "hoge",key:"mongokey"})
 DBのデータを消します
 
 # couston_id
-    ```js
-    couston_id("HOGE")
-    ```
 
-    カスタムIDを決めれます(ない場合はBURISELECTJOB)
+```js
+couston_id("HOGE")
+```
+
+  カスタムIDを決めれます(ない場合はBURISELECTJOB)
