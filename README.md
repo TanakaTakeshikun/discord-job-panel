@@ -67,6 +67,8 @@ create_panel({role:roles,in:interaction message,title:"hoge"})
 sample
 role:[role1,role2,role3]
 
+ロールはIDまたはメンション(string)にしてください
+
 
 **in**:取得したデータを入れてください(class)
 (messageやinteraction)
