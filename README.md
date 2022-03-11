@@ -37,6 +37,7 @@ client.on('messageCreate', async message => {
   if (!i.isSelectMenu()) return;
   const select = discord_job.select(i);
   if (select) {
+    if(!select.info) return i.reply("読み込めなかった")
     if (select.bol) {
       i.member.roles.add(select.info);
       i.reply({content: "ロール追加"});
