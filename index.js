@@ -9,7 +9,7 @@ const dbset = async objct =>{
  };
  const select_menu = select_data => {
    let n = 1,
-   i=1;
+   i=select_data.num+1;
 
    let data = select_data.arr.map(data => {
      const num = i++
@@ -66,7 +66,7 @@ const dbset = async objct =>{
     dataselect=[],
     datacontent=[];
      for(i=0; i < s; i++){
-   const selectdata={title:data.title,arr:data.role.slice((((i+1)*25)-25),25*(i+1))};
+   const selectdata={title:data.title,arr:data.role.slice((((i+1)*25)-25),25*(i+1)),num:(((i+1)*25)-25)};
    const select = select_menu(selectdata);
     datacontent.push(content.slice((((i+1)*25)-25),25*(i+1)));
     dataselect.push(select)
@@ -105,7 +105,7 @@ const dbset = async objct =>{
     dataselect=[],
     datacontent=[];
      for(i=0; i < s; i++){
-   const selectdata={title:data.title,arr:messagearr.slice((((i+1)*25)-25),25*(i+1))};
+   const selectdata={title:data.title,arr:messagearr.slice((((i+1)*25)-25),25*(i+1)),num:(((i+1)*25)-25)};
    const select = select_menu(selectdata);
     datacontent.push(content.slice((((i+1)*25)-25),25*(i+1)));
     dataselect.push(select)

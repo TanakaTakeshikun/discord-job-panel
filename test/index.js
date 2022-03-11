@@ -1,4 +1,4 @@
-const {Client,Intents} = require('discord.js'),
+const {Client,Intents, MessageReaction} = require('discord.js'),
   client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}),
   discord_job = require("./mod.js");
 discord_job.db_type({id: 0,label: "db"})
@@ -12,6 +12,7 @@ client.on('messageCreate', async message => {
     for(let i=0; i < getdata.content.length; i++)message.reply(({content: getdata.content[i].join("\n"),components: [getdata.select[i]]}));
   }
   if (message.content.startsWith("!addjob")) {
+    message.clean
     const args = message.content.split(" ").slice(1);
     const getdata = await discord_job.add_panel({role: args,in : message,title: "ロールを選ぼう"});
     if (!getdata) return message.reply("前回のデータが見つかりません");
