@@ -1,6 +1,6 @@
 {
   "name": "discord-job-panel",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Discord.jsで簡単に役職パネルが作成できます",
   "main": "index.js",
   "directories": {
