@@ -7,7 +7,7 @@ Discord.jsv13
 
 バグがあった場合は``BURI#9515``まで
 
-interactionCreateイベントは未検証なのでバグがある可能性大
+interactionイベント検証済み
 # sample
 ```js
 const {Client,Intents} = require('discord.js'),
@@ -25,7 +25,7 @@ client.on('messageCreate', async message => {
   if (message.content.startsWith("!addjob")) {
     const args = message.content.split(" ").slice(1);
     const getdata = await discord_job.add_panel({role: args,in : message,title: "ロールを選ぼう"});
-    if (!getdata) return message.reply("前回のデータが見つかりません");
+    if (!getdata) return message.reply("前回のデータが見つからない又はロールが不明です");
     for(let i=0; i < getdata.content.length; i++)message.reply(({content: getdata.content[i].join("\n"),components: [getdata.select[i]]}));
   }
   if (message.content == "!deletedb") {
@@ -39,11 +39,13 @@ client.on('messageCreate', async message => {
   if (select) {
     if(!select.info) return i.reply("読み込めなかった")
     if (select.bol) {
-      i.member.roles.add(select.info);
-      i.reply({content: "ロール追加"});
+      i.member.roles.add(select.info)
+      .then(i.reply({content: "ロール追加"}))
+      .catch(()=>i.reply("エラーが発生しました"));
         } else {
       i.member.roles.remove(select.info)
-      i.reply({content: "ロール削除"});
+      .then(i.reply({content: "ロール削除"}))
+      .catch(()=>i.reply("エラーが発生しました"));
     }
   }
 })

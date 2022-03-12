@@ -60,6 +60,10 @@ const dbset = async objct =>{
  create_panel:data=> {
    if (!data.role[0])return undefined;
     let n = 1;
+    for(let i=0; i < data.role.length; i++){
+      const check = data.in.guild.roles.cache.get(data.role[i].replace(/[^0-9]/g, ''));
+      if(!check) return undefined;
+     }
     const content = data.role.map(roles=>{return `${n++}:${data.in.guild.roles.cache.get(roles.replace(/[^0-9]/g, ''))||"error"}`});
     dbset({data:data,rid:JSON.stringify(JSON.stringify(content))});
      let s = content.length/25,
@@ -97,7 +101,11 @@ const dbset = async objct =>{
   if (!data.role[0])return undefined;
   const message =await dbget(data.in.guild.id)
    if(!message) return undefined;
-  const messagearr=data.role.concat(JSON.parse(JSON.parse(message))).map(arr=>arr.slice(1).slice(1))
+  const messagearr=data.role.concat(JSON.parse(JSON.parse(message))).map(arr=>arr.slice(1).slice(1));
+  for(let i=0; i < messagearr.length; i++){
+   const check = data.in.guild.roles.cache.get(messagearr[i].replace(/[^0-9]/g, ''));
+   if(!check) return undefined;
+  }
    let n = 1;
    const content = messagearr.map(roles=>{return `${n++}:${data.in.guild.roles.cache.get(roles.replace(/[^0-9]/g, ''))||"error"}`});
    dbset({data:data,rid:JSON.stringify(JSON.stringify(content))});
