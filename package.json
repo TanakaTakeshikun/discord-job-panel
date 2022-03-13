@@ -26,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/tanakataku/discord-job-panel/issues"
   },
-  "homepage": "https://github.com/tanakataku/discord-job-panel#readme"
+  "homepage": "https://github.com/tanakataku/discord-job-panel#readme",
+  "dependencies": {
+    "@keyv/sqlite": "^3.0.0",
+    "aurora-mongo": "^1.1.3"
+  }
 }
