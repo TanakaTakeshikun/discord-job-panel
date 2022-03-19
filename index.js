@@ -17,7 +17,6 @@ const dbset = async objct =>{
        "label": String(num),
        "value": `${String(n++)}${data.replace(/[^0-9]/g, '')}`,
        "description": `${num}番目のロール`,
-       "emoji": null,
        "default": false
      }
      return datas;
@@ -25,9 +24,7 @@ const dbset = async objct =>{
    const fotdata = {
      "components": [{
        "custom_id": customid||`BURISELECTJOB`,
-       "disabled": false,
        "placeholder": select_data.title || "Nothing selected",
-       "min_values": null,
        "options": data,
        "type": 3
      }],
