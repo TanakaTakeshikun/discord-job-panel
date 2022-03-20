@@ -1,16 +1,17 @@
 /*
 JSONDATA
 */
+const arrdata = "abcdefghijklmnopqrstuvwxyz".split("");
 const dbset = async objct =>await db.set(objct.data.in.guild.id,objct.rid),
 select_menu = select_data => {
-  let i = 1;
+  let i = 0;
+  let num = select_data.num;
    const data = select_data.arr.map(data => {
-    let num =+ String(select_data.num+1);
+    num++
     const datas = {
-       "label": num,
-       "value": `${i++}${data.replace(/[^0-9]/g, '')}`,
-       "description": `${num}番目のロール`,
-       "default": false
+       "label": String(num),
+       "value": `${arrdata[i++]}${data.replace(/[^0-9]/g, '')}`,
+       "description": `${num}番目のロール`
      }
      return datas;
    }),
@@ -100,13 +101,17 @@ delete_db:async ()=>{
   await db.clear();
 },
 remove_panel:async data=>{
-  const message =JSON.parse(await db.get(data.in.guild.id)),
+  const dbcontent = await db.get(data.in.guild.id);
+  if(!dbcontent) return 1;
+  const message =JSON.parse(dbcontent),
   number = Number(data.num)-1;
-  if(message.length-25<number&&number<message.length) return 1;
-  const fotmsg = message.filter(elm =>elm !== message[number]),
-  msg = fotmsg.slice((fotmsg.length<=25)?0:fotmsg.length-25),
-  content=msg.map(roles=>{return `${n++}:${data.in.guild.roles.cache.get(roles.slice(2).replace(/[^0-9]/g, ''))}`});
-  const select = select_menu({title:data.title,arr:content.map(role=>role.id),num:(fotmsg.length<=25)?0:fotmsg.length-25});
+  if(!(message.length-25<number&&number<message.length)) return 2;
+  const fotmsg = message.filter(elm =>elm !== message[number]);
+  let num = fotmsg.length/25
+  const msg = fotmsg.slice(num);
+  const content=msg.map(roles=>{return `${num++}:${data.in.guild.roles.cache.get(roles.slice(2).replace(/[^0-9]/g, ''))}`});
+  dbset({data:data,rid:JSON.stringify(content)});
+  const select = select_menu({title:data.title,arr:content.map(role=>role.slice(2)),num:(fotmsg.length<25)?0:fotmsg.length-25});
   return{content:content,select:select};
 }
  }
