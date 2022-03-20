@@ -158,7 +158,7 @@ role:[role1,role2,role3]
 
 例
 
-[[0~25のロールの名前],[26~nのロールの名前]]
+[[0-25のロールの名前],[26-nのロールの名前]]
 
 **select**
 
@@ -166,7 +166,7 @@ role:[role1,role2,role3]
 
 例
 
-[[0~25のselectのJSON型],[26~nのselectのJSON型]]
+[[0-25のselectのJSON型],[26-nのselectのJSON型]]
 
 # select
 
@@ -233,11 +233,11 @@ DBに対象ギルドの前回のデータが見つからなかったときに返
 
 **content**
 
-数値:ロール名の形でが返されます
+数値:ロール名の形で配列が返されます(create_panelと同じ)
 
 **select**
 
-selectのJSON型が返されます
+selectのJSON型で配列が返されます(create_panelと同じ)
 
 # remove_panel
 
