@@ -1,11 +1,11 @@
 /*
 JSONDATA
 */
-const arrdata = "abcdefghijklmnopqrstuvwxyz".split("");
-const dbset = async objct =>await db.set(objct.data.in.guild.id,objct.rid),
+const arrdata = "abcdefghijklmnopqrstuvwxyz".split(""),
+dbset = async objct =>await db.set(objct.data.in.guild.id,objct.rid),
 select_menu = select_data => {
-  let i = 0;
-  let num = select_data.num;
+  let i = 0,
+ num = select_data.num;
    const data = select_data.arr.map(data => {
     num++
     const datas = {
@@ -70,7 +70,7 @@ select_menu = select_data => {
  bol=false:既にある,true:ない
    */
    select: data=>{
-     if(data.customId!==(customid||"BURISELECTJOB")) return;
+     if(data.customId!==(customid||"BURISELECTJOB")) return 1;
      const info = data.values[0].slice(1);
       if(data.member._roles?.includes(info))return {bol:false,info:info};
         return {bol:true,info:info};
@@ -97,7 +97,10 @@ select_menu = select_data => {
 };
   return {content:datacontent,select:dataselect};
  },
-delete_db:async ()=>{
+   /*
+   すべてのデータを消す
+*/
+clear_db:async ()=>{
   await db.clear();
 },
 remove_panel:async data=>{
@@ -105,13 +108,20 @@ remove_panel:async data=>{
   if(!dbcontent) return 1;
   const message =JSON.parse(dbcontent),
   number = Number(data.num)-1;
-  if(!(message.length-25<number&&number<message.length)) return 2;
+  if(!(Math.floor(message.length/25)*25<=number&&number<message.length)) return 2;
   const fotmsg = message.filter(elm =>elm !== message[number]);
-  let num = fotmsg.length/25
-  const msg = fotmsg.slice(num);
-  const content=msg.map(roles=>{return `${num++}:${data.in.guild.roles.cache.get(roles.slice(2).replace(/[^0-9]/g, ''))}`});
-  dbset({data:data,rid:JSON.stringify(content)});
-  const select = select_menu({title:data.title,arr:content.map(role=>role.slice(2)),num:(fotmsg.length<25)?0:fotmsg.length-25});
+  let num = Math.floor(fotmsg.length/25)*25;  
+  const msg = fotmsg.slice(num),
+  content=msg.map(roles=>{return `${(num++)+1}:${data.in.guild.roles.cache.get(roles.slice(2).replace(/[^0-9]/g, ''))}`});
+  dbset({data:data,rid:JSON.stringify(fotmsg)});
+  const select = select_menu({title:data.title,arr:content.map(role=>role.slice(2)),num:Math.floor(fotmsg.length/25)*25});
+  if(!content) return 3;
   return{content:content,select:select};
-}
+},
+   delete_db:async data=>{
+     const check = await db.get(data);
+     if(!check) return 1;
+     await db.delete(data);
+     return 2;
+   }
  }
