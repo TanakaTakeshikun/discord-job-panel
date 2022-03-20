@@ -327,8 +327,7 @@ clear_db()
 **返り値**
 
 なし
-# couston
-_id
+# couston_id
 
 ```js
 couston_id("HOGE")
